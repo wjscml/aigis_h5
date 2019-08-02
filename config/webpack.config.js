@@ -1,5 +1,5 @@
 'use strict';
-
+const theme = require('../package.json').theme;
 const fs = require('fs');
 const isWsl = require('is-wsl');
 const path = require('path');
@@ -42,6 +42,8 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+// const lessRegex = /\.less$/;
+// const lessModuleRegex = /\.module\.less$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -320,6 +322,30 @@ module.exports = function(webpackEnv) {
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
           oneOf: [
+            {
+              test: /\.styl$/,
+              use: [{
+                loader: 'style-loader',
+              }, {
+                loader: 'css-loader',
+              }, {
+                loader: 'stylus-loader',
+              }],
+            },
+            {
+              test: /\.less$/,
+              use: [{
+                loader: 'style-loader',
+              }, {
+                loader: 'css-loader',
+              }, {
+                loader: 'less-loader',
+                options: {
+                  modifyVars: theme,
+                  javascriptEnabled: true
+                },
+              }],
+            },
             // "url" loader works like "file" loader except that it embeds assets
             // smaller than specified limit in bytes as data URLs to avoid requests.
             // A missing `test` is equivalent to a match.
@@ -343,6 +369,10 @@ module.exports = function(webpackEnv) {
                 ),
                 
                 plugins: [
+                  ["import", {
+                    libraryName: "antd-mobile",                    
+                    style: true
+                  }],
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
@@ -452,6 +482,30 @@ module.exports = function(webpackEnv) {
                 'sass-loader'
               ),
             },
+            // {
+            //   test: lessRegex,
+            //   exclude: lessModuleRegex,
+            //   use: getStyleLoaders(
+            //     {
+            //       importLoaders: 2,
+            //       sourceMap: isEnvProduction && shouldUseSourceMap,
+            //     },
+            //     'less-loader'
+            //   ),
+            //   sideEffects: true,
+            // },
+            // {
+            //   test: lessModuleRegex,
+            //   use: getStyleLoaders(
+            //     {
+            //       importLoaders: 2,
+            //       sourceMap: isEnvProduction && shouldUseSourceMap,
+            //       modules: true,
+            //       getLocalIdent: getCSSModuleLocalIdent,
+            //     },
+            //     'less-loader'
+            //   ),
+            // },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.

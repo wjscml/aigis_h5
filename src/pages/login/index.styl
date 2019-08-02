@@ -1,0 +1,38 @@
+@import "../../common/style/variable.styl"
+.login-wrap
+    padding 0 4.2rem
+    .login-title
+        padding 5.4rem 0
+        font-size: 2.8rem
+        font-weight: 600
+        color $color-title
+    .am-list
+        .am-list-body
+            position relative
+            &:before
+                background-color: #fff
+            &:after
+                background-color: $color-dark-line
+            .am-list-item.am-input-item
+                height 5.4rem
+            .errorTips
+                position absolute
+                bottom -1.6rem
+                left 1.6rem
+                line-height: 1.2rem
+                font-size: 1.2rem  
+                color $color-red
+    .login-submit
+        margin-top 5.4rem
+        margin-bottom: 2.5rem
+        line-height: 4.4rem
+        height: 4.4rem
+        font-size: 1.6rem
+    .login-info
+        display flex
+        justify-content: space-between
+        padding 0 0.6rem
+        color $color-text
+        span 
+            line-height: 1.2rem
+            font-size: 1.2rem        
