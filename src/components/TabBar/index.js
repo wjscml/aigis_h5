@@ -2,14 +2,22 @@ import React from 'react';
 import { TabBar } from 'antd-mobile';
 import Index from '../../pages/index';
 import Market from '../../pages/market';
+import Report from '../../pages/report';
+import News from '../../pages/news';
+import User from '../../pages/user';
+import './index.styl';
 
 export default class Admin extends React.Component {
-    state = {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedTab: this.props.selectedTab
+        }
+    }
+    static defaultProps = {
         selectedTab: '/index'
     }
-    
     handlePress = (i) => {  
-        console.log(i)
         this.setState({
             selectedTab: i
         })
@@ -22,7 +30,17 @@ export default class Admin extends React.Component {
         if (name === 'market') {
             return <Market />
         }
+        if (name === 'report') {
+            return <Report />
+        }
+        if (name === 'news') {
+            return <News />
+        }
+        if (name === 'user') {
+            return <User />
+        }
     }
+    
     render() { 
         const MenuList = [
             {
@@ -61,42 +79,43 @@ export default class Admin extends React.Component {
                 selectedIcon: './assets/image/tab_user_pre@3x.png'
             }
         ]
-        return (
-            <div className="Admin" >                
-                <TabBar>
-                    { 
-                        MenuList.map((item, index) => {
-                            return <TabBar.Item 
-                                title={item.title}  
-                                key={index}  
-                                icon={
-                                    <div
-                                        style={{
-                                            width: '2.5rem',
-                                            height: '2.5rem',
-                                            background: `url(${item.icon}) center center / 2.5rem 2.5rem no-repeat`
-                                        }} 
-                                    />
-                                }
-                                selectedIcon={
-                                    <div
-                                        style={{
-                                            width: '2.5rem',
-                                            height: '2.5rem',
-                                            background: `url(${item.selectedIcon}) center center / 2.5rem 2.5rem no-repeat`
-                                        }} 
-                                    />
-                                }
-                                selected={this.state.selectedTab === item.key}
-                                onPress={()=>this.handlePress(item.key)}
-                            >
-                                {this.renderContent(item.name)}
-                            </TabBar.Item >
-                        })
-                    }
-                </TabBar>
-                
-            </div>
+        return (                 
+            <TabBar
+                tintColor="#007aff"
+                unselectedTintColor="#8e8e8e"
+                prerenderingSiblingsNumber="0"
+            >
+                { 
+                    MenuList.map((item, index) => {
+                        return <TabBar.Item 
+                            title={item.title}  
+                            key={index}  
+                            icon={
+                                <div
+                                    style={{
+                                        width: '2.5rem',
+                                        height: '2.5rem',
+                                        background: `url(${item.icon}) center center / 2.5rem 2.5rem no-repeat`
+                                    }} 
+                                />
+                            }
+                            selectedIcon={
+                                <div
+                                    style={{
+                                        width: '2.5rem',
+                                        height: '2.5rem',
+                                        background: `url(${item.selectedIcon}) center center / 2.5rem 2.5rem no-repeat`
+                                    }} 
+                                />
+                            }
+                            selected={this.state.selectedTab === item.key}
+                            onPress={()=>this.handlePress(item.key)}
+                        >
+                            {this.renderContent(item.name)}
+                        </TabBar.Item >
+                    })
+                }
+            </TabBar>
         );
     }
 }

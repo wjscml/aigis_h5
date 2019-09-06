@@ -1,0 +1,83 @@
+@import '../../common/style/variable.styl';
+@import '../../common/style/mixin.styl';
+.user-wrap
+    height 100%
+    display flex
+    flex-direction: column
+    .user-info-wrap
+        position relative
+        height: 16.5rem
+        .info
+            padding-top 4.1rem
+            margin-left 2.2rem
+            display flex
+            .image
+                margin-right: 1.5rem
+                img 
+                    width: 6.8rem
+                    height 6.8rem
+                    outline none
+                    border none
+                    border-radius: 3.4rem               
+            .name
+                display flex
+                flex-direction column
+                line-height: 0
+                .title
+                    margin 0.8rem 0
+                    line-height: 2.2rem
+                    font-size: 2.2rem
+                    color #fff
+                .icon-vip
+                    font-size 3.4rem    
+                    &.vip
+                        color $color-red
+                    &.normal
+                        color $color-line
+        .background
+            position absolute
+            top 0
+            left 0
+            width 100%
+            height 100%
+            z-index -1
+            filter blur(10px)
+            img
+                width 100%
+                height 100%
+                background-color $color-blue
+    .user-list-wrap
+        flex 1
+        position relative
+        background-color #fff
+        .card
+            position absolute
+            top -1.5rem
+            width 100%   
+            border-radius: 1.5rem
+            background-color #fff
+            .card-part
+                margin-top: 1.5rem
+                padding-bottom: 1.5rem
+                &.line
+                    border-1px($color-line)
+                .card-part-item
+                    padding 0 2.2rem
+                    display flex
+                    align-items center
+                    height 5.2rem
+                    line-height: 0
+                    img
+                        width: 2.2rem
+                        height 2.2rem
+                    .text
+                        flex 1
+                        margin-left: 1.6rem
+                        font-size: 1.6rem
+                        font-weight: 600
+                        color $color-sub-title
+                    .icon-right
+                        font-size: 2rem
+                        color $color-light-text
+      
+            

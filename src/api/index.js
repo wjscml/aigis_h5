@@ -1,17 +1,25 @@
 import { postApi, postFileApi, postNewsApi, tradingviewApi } from './helpers'
 
 const getLogin = postApi('user.login')
-const getLoginByMobileCode = postApi('user.loginByMobileCode')
-const getForget = postApi('user.retrievePassword')
+const getLoginByMobileCode = postApi('user.loginByMobileCodeFromApp')
+const getForget = postApi('user.retrievePasswordFromApp')
 const getCaptcha = postApi('user.getCaptcha')
-const getMobileCode = postApi('user.getMobileCode')
-const getIndicators = postApi('indicator.getIndicators')
+const getMobileCode = postApi('user.getMobileCodeFromApp')
+const getIndicators = postApi('indicator.getIndicatorsFromApp')
 const addFavorIndicator = postApi('indicator.addFavorIndicator')
 const getFavorIndicatorList = postApi('indicator.getFavorIndicatorList')
 
+const submitQuestion = postFileApi('Post.post')
+const getPostList = postApi('Post.getPostList')
+const getPostContent = postApi('Post.getPostContent')
+
+const getAbout = postApi('App.userAgreement')
 const getCategories = postNewsApi('article.categories')
 const getNewsList = postNewsApi('article.getList')
 const getNewsDetail = postNewsApi('article.getDetail')
+
+const getReportCategories = postNewsApi('report.categories')
+const getReportList = postNewsApi('report.getList')
 
 const getNomalList = postApi('report.getNomalList')
 const getSpecialList = postApi('report.getSpecialList')
@@ -30,9 +38,11 @@ const getRefresh = tradingviewApi('quantification.tradingRefresh')
 
 const getSearchList = postApi('article.getSearchList')
 const getAllQuestion = postApi('user.getAllQuestion')
-const submitQuestion = postFileApi('user.submitQuestion')
 const deleteQuestion = postApi('user.questionDelete')
 const changeUserInfo = postFileApi('user.changeUserInfo')
+
+const checkUnReadMessage = postApi('App.checkUnReadMessage')
+const getMessageList = postApi('App.getMessageList')
 
 export {
   getLogin,
@@ -43,8 +53,16 @@ export {
   getIndicators,
   addFavorIndicator,
   getFavorIndicatorList,
+   
+  submitQuestion,
+  getPostList,
+  getPostContent,
 
+  getAbout,
   getCategories,
+  getReportCategories,
+  getReportList,
+
   getNomalList,
   getSpecialList,
   getReportContent,
@@ -65,7 +83,9 @@ export {
 
   getSearchList,
   getAllQuestion,
-  submitQuestion,
   deleteQuestion,
-  changeUserInfo
+  changeUserInfo,
+
+  checkUnReadMessage,
+  getMessageList
 }

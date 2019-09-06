@@ -1,0 +1,51 @@
+.chart-series-controls > .apply-common-tooltip:not(:first-child) {
+  display: none
+}
+
+.pane-legend-line > .pane-legend-icon-container {
+  display: none
+}
+
+.chart-page {
+  background-color: rgb(23, 23, 52)
+}
+
+.chart-page .chart-container {
+  border-color: rgb(36, 36, 72)
+}
+
+.chart-controls-bar {
+  background-color: rgb(36, 36, 72)
+}
+
+.inner-1xuW-gY4- {
+	background-color: rgba(255, 255, 255, 0.17)
+}
+
+.group-wWM3zP_M- { 
+  background-color: rgb(36, 36, 72);
+  color: rgb(191, 191, 191)
+}
+
+.button-13wlLwhJ-, .button-2ioYhFEY-.isInteractive-20uLObIc- {
+  color: rgb(191, 191, 191)
+}
+
+.button-13wlLwhJ-.hovered-FUo4RNOC-, .feature-no-touch .button-13wlLwhJ-:active, .feature-no-touch .button-13wlLwhJ-:hover, .feature-touch .button-13wlLwhJ-:active {
+  color: rgb(6, 238, 254)
+}
+.button-2ioYhFEY-.isInteractive-20uLObIc-.hovered-3perbaxJ-, .feature-no-touch .button-2ioYhFEY-.isInteractive-20uLObIc-:active, .feature-no-touch .button-2ioYhFEY-.isInteractive-20uLObIc-:hover, .feature-touch .button-2ioYhFEY-.isInteractive-20uLObIc-:active {
+  color: rgb(6, 238, 254)
+}
+.button-263WXsg-- .icon-1Y-3MM9F-.hovered--MYZioUu-, .feature-no-touch .button-263WXsg-- .icon-1Y-3MM9F-:active, .feature-no-touch .button-263WXsg-- .icon-1Y-3MM9F-:hover, .feature-touch .button-263WXsg-- .icon-1Y-3MM9F-:active {
+  color: rgb(6, 238, 254)
+}
+
+.button-263WXsg-- .icon-1Y-3MM9F- {
+  color: rgba(255, 255, 255, 0.4)
+}
+
+.wrap-1h7U5nKd-, .group-2JyOhh7Z- {
+  background-color: rgb(36, 36, 72)
+}
+

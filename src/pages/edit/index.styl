@@ -1,0 +1,26 @@
+@import '../../common/style/variable.styl';
+@import '../../common/style/mixin.styl';
+.edit-wrap
+    height 100%
+    background-color #fff
+    .edit-top
+        display flex
+        justify-content: space-between
+        align-items: center
+        height 5.4rem
+        padding 0 1.5rem
+        border-1px($color-line)
+        line-height: 0
+        .cancle
+            color $color-dark-line
+        .title
+            font-size: 1.9rem
+            font-weight: 600
+            color $color-title
+        .send 
+            color $color-blue
+    .edit-main
+        padding 2rem 1rem
+        .errorTips
+            margin-left 15px
+            color $color-red

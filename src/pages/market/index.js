@@ -1,15 +1,23 @@
 import React from 'react';
-import { Tabs } from 'antd-mobile';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Tabs, Checkbox, Modal } from 'antd-mobile';
+import NoResult from '../../components/NoResult';
+import Scroll from '../../components/Scroll';
 import { getIndicators, addFavorIndicator, getFavorIndicatorList } from '../../api';
 import WebSocketClass from '../../api/socket.js';
 import { toDecimal, toPercent } from '../../common/js/data.js';
-import { addClass, removeClass } from '../../common/js/dom.js';
+//import { addClass, removeClass } from '../../common/js/dom.js';
+import cookie from '../../common/js/cookie';
 import './index.styl';
 
+const alert = Modal.alert
+const CheckboxItem = Checkbox.CheckboxItem
 var socket = null;
 var classNum = [];
-export default class Market extends React.Component {
+class Market extends React.Component {
     state = {
+        session: cookie.getCookie('session'),
         type: 0,
         subType: 0,
         marketNav: [],
@@ -17,16 +25,27 @@ export default class Market extends React.Component {
         originData: [],
         favorData: [],
         isFirst: true,
-        listData: []
+        listData: [],
+        listDataAll: []
     }
     componentDidMount () {
-        document.title="行情数据 - Aigis - 埃癸斯风险控制系统";
+        document.title="Aigis - 埃癸斯风险控制系统";
         this._getIndicators() 
     }
-    _getIndicators () {
-        getIndicators({
-            session: 'xdYVS57m7ZtpLXgsnBlOlXr-iRCtWMDw'
-        }).then(res => {
+    componentWillUnmount () {
+        socket.closeMyself()
+    }
+
+    getRefresh = () => {    
+        this.setState({
+            isFirst: true
+        })
+        socket.closeMyself() 
+        this._getIndicators()
+    }
+    _getIndicators = () => {
+        getIndicators().then(res => {
+            //console.log(res)
             let marketNav = []
             marketNav = res.map(item => ({
                 name: item.cateName
@@ -58,7 +77,7 @@ export default class Market extends React.Component {
             this._getMarketsData(this.state.type)
         })    
     }
-    _getMarketsData (type) {
+    _getMarketsData = (type) => {
         if (type < 3) {
             let nameData = this.state.originData[type]
             let subNavData = []
@@ -88,33 +107,37 @@ export default class Market extends React.Component {
             exchangeNameData.map(item => (
                 classNum.push(item.length)
             ))
-            console.log(classNum)
+            //console.log(classNum)
             this.sendSocketData(nameDataAll)        
             this.setState({
                 nameData: nameDataAll
             })
         } else {
-            getFavorIndicatorList({
-                session: this.props.userInfo.session,
-                isShowLoading: false
-            }).then(res => {
-                if (res && res.length !== 0) {
-                    let favorData = res
-                    this.sendSocketData(favorData)
-                    this.setState({
-                        nameData: favorData,
-                        subNavData: []
-                    }) 
-                } else {
-                    let favorData = []
-                    this.sendSocketData(favorData)
-                    this.setState({
-                        nameData: favorData,
-                        subNavData: []
-                    }) 
-                }
-            })
+            this.getFavorList()
         }
+    }
+    getFavorList = () => {
+        getFavorIndicatorList({
+            session: this.state.session,
+            isShowLoading: false
+        }).then(res => {
+            if (res && res.length !== 0) {
+                classNum = [res.length]
+                let favorData = res
+                this.sendSocketData(favorData)
+                this.setState({
+                    favorData,
+                    nameData: favorData
+                }) 
+            } else {
+                let favorData = []
+                this.sendSocketData(favorData)
+                this.setState({
+                    favorData,
+                    nameData: favorData
+                }) 
+            }
+        })
     }
     sendSocketData = (data) => {
         if (data.length !== 0) {
@@ -145,54 +168,48 @@ export default class Market extends React.Component {
                 })
                 return '--'
             })
-            
+            valueData = valueData.concat(valueData)
+
+            let listDataAll = []
+            for (let n in this.state.nameData) { 
+                listDataAll.push({
+                    name: this.state.nameData[n].indicator_name,
+                    code: this.state.nameData[n].indicator_code,
+                    id: this.state.nameData[n].indicator_id,
+                    favor: this.state.nameData[n].favor,
+                    value: valueData[n]
+                })             
+            } 
+    
             if (this.state.isFirst) {
                 this.setState({
-                    isFirst: false
+                    isFirst: false,
+                    listData: []
                 })
-                let listDataAll = []
-                for (let n in this.state.nameData) {
-                    listDataAll.push({
-                        name: this.state.nameData[n].indicator_name,
-                        code: this.state.nameData[n].indicator_code,
-                        id: this.state.nameData[n].indicator_id,
-                        favor: this.state.nameData[n].favor,
-                        value: valueData[n]
-                    })
-                } 
+                
                 let listData =[]
                 classNum.map(item => (
                     listData.push(listDataAll.splice(0, item))
-                ))
+                ))       
                 this.setState({
                     listData
-                })
-            } else { 
+                })           
+            } else {
                 let listData = this.state.listData
-                for (let n in this.state.nameData) {
-                    //if (valueData[n] !== '--') {
-                        //let oldValue = parseFloat(this.state.listData[n].value.change)
-                        //let newValue = parseFloat(valueData[n].change)
-                        //let m = parseFloat(n) + 1
-                        // let changeDom = this.div.current.content.current.children[m]
-
-                        // if (oldValue < newValue) {   
-                        //     listData[n].value = valueData[n]
-                        //     this.setState({ listData })
-                        //     addClass(changeDom, 'shadowUp')
-                        //     setTimeout(() => {
-                        //         removeClass(changeDom, 'shadowUp')
-                        //     }, 500)
-                        // } else {
-                        //     listData[n].value = valueData[n]
-                        //     this.setState({ listData })
-                        //     addClass(changeDom, 'shadowDown')
-                        //     setTimeout(() => {
-                        //         removeClass(changeDom, 'shadowDown')
-                        //     }, 500)
-                        // }
-                    //}
-                }
+                let newValueData =[]
+                classNum.map(item => (
+                    newValueData.push(valueData.splice(0, item))
+                ))
+                for (let m in newValueData) {
+                    for (let n in newValueData[m]) {
+                        if (newValueData[m][n] !== '--') {
+                            listData[m][n].value = newValueData[m][n]
+                            this.setState({
+                                listData
+                            })
+                        }
+                    }
+                }            
             }
         }
     }
@@ -205,6 +222,29 @@ export default class Market extends React.Component {
         })
         this._getMarketsData(i)
     }
+    openSearch = () => {
+        window.location.href = './common/search'
+    }
+
+    showMyFavor = () => { 
+        this.myFavor.show()
+    }
+    onMyFavorRef = (ref) => {
+        this.myFavor = ref
+    }
+    deleteAll = (ids) => {
+        ids.forEach(id => {
+            addFavorIndicator({
+                indicatorId: id,
+                session: this.state.session,
+                action: 2
+            }).then(res => {
+                //console.log(res)
+                this.myFavor.hide()
+            })
+        })     
+        this.getRefresh()
+    }
     render() {
         return (
             <div className="market-wrap">   
@@ -212,34 +252,64 @@ export default class Market extends React.Component {
                     <div className="nav-wrap">
                         {
                             this.state.marketNav.map((item, index) => {
-                                return <div className={this.state.type==index ? "nav-btn nav-btn-s" : "nav-btn"} 
+                                return <div className={this.state.type===index ? "nav-btn nav-btn-s" : "nav-btn"} 
                                     onClick={()=>this.handleSelect(index)}
                                     key={index}>
                                     {item.name}
                                 </div>
                             })
-                        }
-                        
+                        }                  
                     </div>
-                    <div className="edit-btn" style={this.state.type===3?{}:{display:'none'}}>编辑</div>
-                    <div className="search-btn">
+                    <div className="edit-btn" 
+                        style={this.state.type===3&&this.state.listData.length!==0?{}:{display:'none'}} 
+                        onClick={this.showMyFavor}
+                    >编辑</div>
+                    <div className="search-btn" onClick={this.openSearch}>
                         <i className="icon-search"></i>
                     </div>
                 </div> 
-                <div className="market-main">
-                    <MarketList tabs={this.state.subNavData} data={this.state.listData} type={this.state.type} subType={this.state.subType} />
-                </div>
-
-            </div>   
+                <MarketList tabs={this.state.subNavData} data={this.state.listData} 
+                    type={this.state.type} subType={this.state.subType} />
+                
+                <MyFavor onRef={this.onMyFavorRef} data={this.state.favorData} 
+                    deleteAll={this.deleteAll} />
+            </div>
         );
     }
 }
+export default connect(state => ({
+    userInfo: state.userInfo
+}))(Market);
+
 class MarketList extends React.Component{
+    toDetail = (item) => {
+        window.open(`/common/market/${item.code}:${item.name}`, '_blank')
+    }
     renderContent = data => {
-        return data.map(items =>  
-            items.map((item, index) => 
-                <div key={index}>{item.name}</div> 
-            )                     
+        if (data.length == 0) {
+            return <div style={{marginTop:'10rem'}}>
+                <NoResult tips="暂无数据~" />
+            </div>
+        }
+        return data.map((items, index) =>  
+            <div className="list-main" key={index}>
+                <Scroll>
+                    <div className="list-content">
+                        {
+                            items.map((item, index) => 
+                                <div key={index} className="listItem" onClick={()=>this.toDetail(item)}>
+                                    <div>
+                                        <div className="name">{item.name}</div>
+                                        <div className="code">{item.code}</div>
+                                    </div>
+                                    <div className="price">{item.value.price}</div>
+                                    <div className={item.value.change<0?"changePer green":"changePer red"}>{item.value.changePer}</div>    
+                                </div> 
+                            )
+                        }
+                    </div>   
+                </Scroll>  
+            </div>             
         )
     }   
     render() {
@@ -247,7 +317,7 @@ class MarketList extends React.Component{
             title: item.exchange_code         
         }))
         return (
-            <div>
+            <div className="list-wrap">
                 {
                     this.props.type===0 ?
                     <Tabs 
@@ -284,9 +354,94 @@ class MarketList extends React.Component{
                         {this.renderContent(this.props.data)}
                     </Tabs> : null
                 }
+                {
+                    this.props.type===3 ?
+                    <div className="zixuan">
+                        {this.renderContent(this.props.data)}
+                    </div> : null  
+                }          
+            </div>     
+        )
+    }
+}
+
+class MyFavor extends React.Component{
+    state = {
+        visible: null,
+        listId: []
+    }
+    componentDidMount () {
+        this.props.onRef(this)
+    }
+    show = () => {
+        this.setState({
+            visible: true
+        })
+    }
+    hide = () => {
+        this.setState({
+            visible: false
+        })
+    }
+    onChange = (val) => {
+        let arr = this.state.listId
+        const index = arr.findIndex((item) => {
+            return item === val
+        })
+        if (index === 0) {
+            return
+        }
+        if (index > 0) {
+            arr.splice(index, 1)  
+        }
+        if (index < 0) {
+            arr.push(val)    
+        }
+        this.setState({
+            listId: arr
+        })        
+    }
+    confirm = () => {
+        alert('', '是否取消关注所选项', [
+            { text: '取消', style: {color: 'rgb(171, 171, 171)'}},
+            { text: '确定', onPress: () => this.props.deleteAll(this.state.listId)}
+        ])
+    }
+
+    render() {
+        return (   
+            this.state.visible ?
+            <div className="myFavor-wrap">
+                <div className="top">
+                    <div className="small" onClick={this.hide}>返回</div>
+                    <div className="big">我的自选</div>
+                    <NavLink to="./common/search" className="small" >添加</NavLink>
+                </div>
                 
-            </div>
-            
+                <div className="edit-box">
+                    <Scroll>
+                        <div>
+                        {
+                            this.props.data.map((item, index) => {
+                                return <CheckboxItem key={index} onChange={()=>this.onChange(item.indicator_id)}>
+                                    { item.indicator_name }
+                                    <span className="code">
+                                        { item.indicator_code }
+                                    </span>
+                                </CheckboxItem>
+                            })
+                        }
+                        </div>
+                    </Scroll>
+                    {
+                        this.state.listId.length ?
+                        <div className="delete-bar" onClick={this.confirm}>
+                            <i className="icon-delete_all" />
+                        </div>
+                        : null
+                    }     
+                </div>
+            </div> : null
         )
     }
 }

@@ -1,46 +1,131 @@
 @import '../../common/style/variable.styl';
 @import '../../common/style/mixin.styl';
-.market-top
-    display flex
-    align-items: center
-    justify-content: space-between
-    padding 0 1.5rem
-    height 5.4rem
-    background-color #fff
-    border-1px($color-line)
-    .nav-wrap  
+.market-wrap
+    height 100%
+    .market-top
         display flex
-        align-items: center 
-        .nav-btn
+        align-items: center
+        justify-content: space-between
+        padding 0 1.5rem
+        height 5.4rem
+        background-color #fff
+        border-1px($color-line)
+        .nav-wrap  
+            display flex
+            align-items: center 
+            .nav-btn
+                position relative
+                margin-right: 2.1rem
+                height 5.4rem
+                line-height: 5.4rem
+                font-size: 1.5rem
+                font-weight: 600
+                &.nav-btn-s
+                    font-size: 1.9rem
+                    &:after
+                        content ''
+                        position absolute
+                        bottom 0
+                        left 0
+                        width: 100%
+                        height 4px
+                        background-color $color-blue
+        .edit-btn
+            color $color-light-text
+        .search-btn
+            font-size 0
+            color $color-blue
+            .icon-search
+                font-size: 2.4rem  
+    .list-wrap
+        height: 100%
+        .am-tabs-default-bar
+            .am-tabs-default-bar-tab
+                padding 0
+                line-height: 4.4rem
+                height 4.4rem
+                font-size: 1.2rem
+            .am-tabs-default-bar-tab-active
+                font-size: 1.5rem
+                font-weight: 600
+        .zixuan
             position relative
-            margin-right: 2.1rem
+            height 100%
+        .list-main
+            position absolute
+            top 0
+            bottom 0
+            width 100%
+            background-color #fff
+            .list-content  
+                padding 1rem 1.5rem
+                background-color #fff
+                .listItem
+                    display flex
+                    justify-content: space-between
+                    align-items: center
+                    height 5.2rem
+                    .name
+                        margin-bottom: 0.7rem
+                        font-size: 1.5rem
+                        color $color-sub-title
+                    .code
+                        font-size: 1rem
+                        color $color-light-text
+                    .price
+                        font-size: 1.5rem
+                        color $color-sub-title
+                    .changePer
+                        width 7.5rem
+                        height 2.4rem
+                        line-height: 2.4rem
+                        text-align: center
+                        font-size: 1.4rem
+                        color #fff
+                        border-radius: 4px
+                        &.red
+                            background-color $color-red
+                        &.green
+                            background-color $color-green
+    .myFavor-wrap
+        position fixed
+        top 0
+        left 0
+        right 0
+        bottom 0
+        background-color #ffffff
+        z-index: 101
+        .top
+            display flex
+            justify-content: space-between
+            align-items: center
             height 5.4rem
-            line-height: 5.4rem
-            font-size: 1.5rem
-            font-weight: 600
-            &.nav-btn-s
+            border-1px($color-line)
+            .small
+                padding 0 1.5rem
+                font-size: 1.4rem
+                color $color-blue
+            .big
                 font-size: 1.9rem
-                &:after
-                    content ''
-                    position absolute
-                    bottom 0
-                    left 0
-                    width: 100%
-                    height 4px
-                    background-color $color-blue
-    .edit-btn
-        color $color-light-text
-    .search-btn
-        font-size: 2.4rem
-        color $color-blue
-.market-main
-    .am-tabs-default-bar
-        
-        .am-tabs-default-bar-tab
-            padding 0
-            line-height: 4.4rem
-            height 4.4rem
-            font-size: 1.2rem
-        .am-tabs-default-bar-tab-active
-            font-size: 1.5rem
-            font-weight: 600
+                font-weight: 600
+        .edit-box
+            position fixed
+            top 5.4rem
+            bottom 9.4rem
+            width: 100% 
+            .am-list-content
+                font-size: 1.5rem
+                color $color-sub-title
+                .code
+                    margin-left: 1.5rem
+                    font-size: 1.2rem
+                    color $color-light-text
+            .delete-bar
+                width 100%
+                height 4.4rem
+                text-align: center
+                background-color $color-blue
+                .icon-delete_all
+                    line-height: 4.4rem
+                    font-size: 2rem
+                    color #fff

@@ -1,0 +1,49 @@
+@import '../../common/style/variable.styl';
+@import '../../common/style/mixin.styl';
+.news-wrap
+    position relative
+    .news-top
+        display flex
+        align-items: center
+        padding-left: 1.5rem
+        height 5.4rem
+        font-size: 1.9rem
+        font-weight: 600
+        background-color #ffffff
+        color $color-title
+        border-1px($color-line)
+    .news-list
+        position absolute
+        left 0
+        top 9.8rem
+        width: 100%
+        height calc(100vh - 14.8rem)
+        background-color #fff
+        .content
+            padding 1rem 1.5rem
+            .news-item
+                display flex
+                padding 1rem 0
+                border-1px($color-line)
+            .image
+                margin-right: 1.2rem
+                img 
+                    border-radius: 8px
+                    width: 10rem
+                    height 7rem
+            .right
+                flex 1
+                display flex
+                flex-direction: column
+                justify-content: space-between
+                .title
+                    line-height: 1.8rem
+                    font-size 1.5rem
+                    color $color-sub-title
+                .info
+                    display flex
+                    justify-content: space-between
+                    line-height: 1.6rem
+                    font-size: 1rem
+                    color $color-light-text
+        

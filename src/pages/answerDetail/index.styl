@@ -1,0 +1,88 @@
+@import '../../common/style/variable.styl';
+@import '../../common/style/mixin.styl';
+.answer-detail-wrap
+    display: flex
+    flex-direction: column
+    height 100%
+    .top
+        display flex
+        align-items center
+        height 5.4rem
+        padding 0 1.5rem
+        background-color #fff
+        border-1px($color-line)
+        line-height: 0
+        .icon-back
+            margin-right 2rem
+            color $color-title
+            font-size: 2.2rem
+        .title
+            font-size: 1.9rem
+            font-weight: 600
+            color $color-title
+    .main
+        .content-wrap
+            margin-bottom 1.5rem
+            padding 0 1.5rem 1.4rem
+            background-color #fff
+            .time
+                padding 2rem 0
+                display flex
+                align-items center
+                height 1.2rem
+                font-size: 1.2rem
+                line-height: 0
+                color $color-blue
+                .icon-time
+                    margin-right 2rem
+                    width: .6rem
+                    height .6rem
+            .text
+                margin-left: 2.6rem
+                line-height: 2.4rem
+                font-size 1.6rem
+                color $color-text
+                .images-content
+                    display flex
+                    flex-wrap wrap   
+                    .pic
+                        margin-top 1.2rem
+                        margin-right: 1.2rem
+                        background: no-repeat center
+                        background-size cover
+                        width: calc(33.3% - 0.8rem)
+                        height: calc(33.3vw - 3rem)
+                        &:nth-child(3),&:nth-child(6)
+                            margin-right: 0
+                    .picOne
+                        margin-top 1.2rem
+                        background: no-repeat center
+                        background-size cover
+                        width calc(66.7% - 0.4rem)
+                        height calc(66.7vw - 1.5rem)
+        .qusetion-wrap
+            padding 0 1.5rem 1.4rem
+            background-color #fff
+            .title
+                padding 2rem 0
+                display flex
+                align-items center
+                height 1.2rem
+                font-size: 1.2rem
+                line-height: 0
+                color $color-blue
+                .icon-time
+                    margin-right 2rem
+                    width: .6rem
+                    height .6rem
+            .text
+                margin-left 2.6rem
+                margin-bottom 1.4rem
+                line-height: 2.1rem
+                font-size: 1.4rem
+                color $color-text
+            .time
+                margin-left 2.6rem
+                height 1.2rem
+                font-size: 1.2rem
+                color $color-light-text

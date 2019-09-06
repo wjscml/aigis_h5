@@ -7,17 +7,11 @@ module.exports = function(app) {
         changeOrigin: true
     }))
     app.use(proxy("/apis/news", {
-        target: "https://api.cnibd.com",
+        target: "https://aigis.leadfintech.com",
         changeOrigin: true,
-        pathRewrite: {
-            "^/apis/news": ""
-        }
     }))
     app.use(proxy("/apis", {
-        target: "https://aigis.leadfintech.com:8888",
-        changeOrigin: true,
-        pathRewrite: {
-            "^/apis": ""
-        }
+        target: "https://aigis.leadfintech.com",
+        changeOrigin: true 
     }))
 }

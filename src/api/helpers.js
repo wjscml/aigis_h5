@@ -11,15 +11,21 @@ const ERR_OK = '0'
 const FAIL = '1000'
 
 export function postApi (apiRoute) {
-  return function (params) {
+  return function (params, secretStr) {
     let loading;
     if (params && params.isShowLoading !== false){
         loading = document.getElementById('ajaxLoading');
         loading.style.display = 'block';
     }
+    let url;
+    if (secretStr) {
+      url = baseUrl + `/site/index?method=${apiRoute}&secretStr=${secretStr}&format=json`
+    } else {
+      url = baseUrl + `/site/index?method=${apiRoute}&format=json`
+    }
     return axios({
       method: 'post',
-      url: baseUrl + `/site/index?method=${apiRoute}&format=json`,
+      url: url,
       data: params,
       headers: {
         'Content-type': 'application/x-www-form-urlencoded'

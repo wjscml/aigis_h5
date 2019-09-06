@@ -1,0 +1,62 @@
+@import "../../common/style/variable.styl";
+@import '../../common/style/mixin.styl';
+.forget-wrap
+    .forget-top
+        display flex
+        align-items center
+        height 5.4rem
+        padding 0 1.5rem
+        margin-bottom: 7.9rem
+        border-1px($color-line)
+        line-height: 0
+        .icon-back
+            margin-right 2rem
+            color $color-title
+            font-size: 2.2rem
+        .title
+            font-size: 1.9rem
+            font-weight: 600
+            color $color-title
+    .forget-first,.forget-second
+        padding 0 4.2rem
+        .login-title
+            padding 5.4rem 0
+            font-size: 2.8rem
+            font-weight: 600
+            color $color-title
+        .am-list
+            .am-list-body
+                position relative
+                &:before
+                    background-color: #fff
+                &:after
+                    background-color: $color-dark-line
+                .am-list-item.am-input-item
+                    height 5.4rem
+                .errorTips
+                    position absolute
+                    bottom -1.6rem
+                    left 1.6rem
+                    line-height: 1.2rem
+                    font-size: 1.2rem  
+                    color $color-red
+                .send
+                    position absolute
+                    right 3.4rem
+                    bottom 2rem
+                    line-height: 1.4rem
+                    font-size: 1.4rem
+                    color $color-blue
+                .count
+                    position absolute
+                    right 3.4rem
+                    bottom 2rem
+                    line-height: 1.4rem
+                    font-size: 1.4rem
+                    color $color-text
+        .login-submit
+            margin-top 5.4rem
+            margin-bottom: 2.5rem
+            line-height: 4.4rem
+            height: 4.4rem
+            font-size: 1.6rem

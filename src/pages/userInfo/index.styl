@@ -1,0 +1,67 @@
+@import '../../common/style/variable.styl';
+@import '../../common/style/mixin.styl';
+.private-wrap
+    height 100%
+    
+    .top
+        display flex
+        align-items center
+        height 5.4rem
+        padding 0 1.5rem
+        border-1px($color-line)
+        line-height: 0
+        background-color #fff
+        .icon-back
+            margin-right 2rem
+            color $color-title
+            font-size: 2.2rem
+        .title
+            font-size: 1.9rem
+            font-weight: 600
+            color $color-title
+    .avatar-wrap
+        margin 4rem 0
+        display flex
+        justify-content: center
+        .avatar-box
+            position relative
+            width: 11rem
+            height 11rem
+            border-radius 5.5rem
+            background-color #fff
+            .avatar
+                width: 11rem
+                height 11rem
+                border-radius 5.5rem
+            .camera
+                position absolute
+                right 0
+                bottom 0
+                width: 3rem
+                height 3rem
+            .file
+                display block
+                position absolute
+                left 0
+                top 0
+                width 11rem
+                height 11rem
+                cursor: pointer
+                opacity 0
+    .list    
+        background-color #fff
+        .list-item
+            padding 0 1.5rem
+            display flex
+            align-items center
+            height 5.2rem
+            line-height: 0
+            border-1px($color-line)
+            .title
+                flex 1
+                font-size: 1.6rem
+                font-weight: 600
+                color $color-sub-title
+            .value
+                font-size: 1.6rem
+                color $color-light-text

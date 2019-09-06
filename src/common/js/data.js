@@ -3,12 +3,10 @@ export function padDate (v) {
     return v
 }
   
-export function formatDate (timestamp) {
-    var date = new Date(timestamp)
-    var y = date.getFullYear()
-    var m = date.getMonth() + 1
-    var d = date.getDate()
-    return y + '/' + m + '/' + d
+export function formatDate (date) {
+    var pad = n => n < 10 ? `0${n}` : n;
+    var dateStr = `${date.getFullYear()}-${pad(date.getMonth() + 1)}`
+    return dateStr
 }
   
 export function getCurrentTime (timestamp) {
@@ -80,5 +78,15 @@ export function toPercent (str) {
     return str
   }
   return (Math.round(str * 10000) / 100).toFixed(2) + '%'
+}
+
+export function getLength (str) {
+  var realLength = 0, len = str.length, charCode = -1;
+  for (var i = 0; i < len; i++) {
+    charCode = str.charCodeAt(i);
+    if (charCode >= 0 && charCode <= 128) realLength += 1;
+    else realLength += 2;
+  }
+  return realLength;
 }
   

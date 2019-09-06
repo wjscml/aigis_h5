@@ -1,0 +1,59 @@
+@import '../../common/style/variable.styl';
+@import '../../common/style/mixin.styl';
+.report-detail-wrap
+    position fixed
+    top 0
+    bottom 0
+    left 0
+    right 0
+    background-color #ffffff
+    z-index 101
+    .top
+        display flex
+        align-items: center
+        justify-content: space-between
+        padding 0 1.5rem
+        height 5.4rem
+        background-color #fff
+        border-1px($color-line)
+        .icon-back
+            color $color-title
+            font-size: 2.2rem
+        .icon-favor, .icon-favor_fill
+            color $color-blue
+            font-size: 2.2rem
+    .main
+        height: calc(100% - 5.4rem)
+        padding 0 1.5rem
+        position relative
+        .report-info
+            padding 1.5rem 0
+            border-1px($color-line)
+            .title
+                margin-bottom 1.5rem
+                line-height: 2.8rem
+                font-size: 1.9rem
+                color $color-title
+            .info
+                color $color-light-text
+        .report-content      
+            padding 1rem 0 2rem
+            .pdf-tips
+                color $color-text
+            .pdf-box
+                margin-top 1.6rem
+                display flex
+                align-items: center
+                .icon-pdf
+                    margin-right: 1.2rem
+                    font-size: 2.8rem
+                    color $color-red
+                .text
+                    color $color-blue
+            .notice
+                position absolute
+                left 0
+                bottom 0
+                padding 1.5rem
+                width: 100%
+                color $color-light-text
