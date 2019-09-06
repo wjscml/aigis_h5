@@ -6,12 +6,8 @@ module.exports = function(app) {
         ws: true,
         changeOrigin: true
     }))
-    app.use(proxy("/apis/news", {
-        target: "https://aigis.leadfintech.com",
-        changeOrigin: true,
-    }))
     app.use(proxy("/apis", {
         target: "https://aigis.leadfintech.com",
-        changeOrigin: true 
+        changeOrigin: true
     }))
 }
